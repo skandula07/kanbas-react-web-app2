@@ -7,5 +7,6 @@ export default function Lab2() {
         <h4>Excersize 2.3</h4> 
       </div>
     );
-  }
+  } 
+  
   
