@@ -6,5 +6,5 @@ export default function Lab1() {
         <h4>Excersize 1.2</h4>
       </div> 
     );
-  }
+  } 
   

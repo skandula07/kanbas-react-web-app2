@@ -6,6 +6,6 @@ export default function Labs() {
       <h1>Labs</h1>
       <Lab1 />
       <Lab2 />
-    </div> 
+    </div>   
   );
 }
