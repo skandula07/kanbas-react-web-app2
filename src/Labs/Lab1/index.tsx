@@ -25,7 +25,7 @@ export default function Lab1() {
           tag to tell browsers to render the gaps.
         </p>
       </div>
-
+ 
       <Lists />
       <Table />
       <Forms />
