@@ -1,5 +1,6 @@
 import Lists from "./Lists";
 import Table from "./Table";
+import Forms from "./Forms";
 
 export default function Lab1() {
     return (
@@ -26,8 +27,6 @@ tag to tell browsers to render the gaps.
 
       <Lists />
       <Table />
-      
-
 
         <h2>Lab 1</h2>
         <h4>Excersize 1.1</h4>
