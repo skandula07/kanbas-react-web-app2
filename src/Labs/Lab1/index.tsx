@@ -27,6 +27,7 @@ tag to tell browsers to render the gaps.
 
       <Lists />
       <Table />
+      <Forms />
 
         <h2>Lab 1</h2>
         <h4>Excersize 1.1</h4>
