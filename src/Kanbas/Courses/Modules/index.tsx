@@ -1,6 +1,7 @@
 export default function Modules() {
   return (
     <div>
+      <h1>Modules</h1>
       {/* Implement Collapse All button, View Progress button, etc. */}
       <ul id="wd-modules">
         <li className="wd-module">
