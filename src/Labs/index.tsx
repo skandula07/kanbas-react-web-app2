@@ -1,5 +1,3 @@
-import { HashRouter, Link, Route, Routes } from "react-router-dom";
-import Kanbas from "../Kanbas";
 import Lab1 from "./Lab1";
 import Lab2 from "./Lab2";
 import TOC from "./TOC";

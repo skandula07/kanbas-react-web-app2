@@ -1,8 +1,4 @@
-import { HashRouter, Link, Route, Routes } from "react-router-dom";
-import Kanbas from "../Kanbas";
-// import Labs from "./index"; 
-import Lab1 from "./Lab1";
-import Lab2 from "./Lab2";
+import {Link} from "react-router-dom";
 export default function TOC() {
   return (
     <ul>
