@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <p>Welcome to Web Dev ☆</p>
+        {/* <p>Welcome to Web Dev ☆</p> */}
 
         <HashRouter>
           <Link to="/Labs">Labs</Link> |  <Link to="/Kanbas">Kanbas</Link>
