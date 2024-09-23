@@ -8,10 +8,17 @@ function App() {
   return (
     <div className="App">
       <div>
-        {/* <p>Welcome to Web Dev ☆</p> */}
+        <h1>Sree Kandula ☆ CS4550 Section 01</h1>        
 
         <HashRouter>
-          <Link to="/Labs">Labs</Link> |  <Link to="/Kanbas">Kanbas</Link>
+          <Link to="/Labs">Labs</Link> &nbsp;|&nbsp;<Link to="/Kanbas">Kanbas</Link>&nbsp;|&nbsp; <a href="https://github.com/skandula07/kanbas-react-web-app2/tree/a1"> GitHub Repo</a>
+          <br />
+          <br />
+          <hr />
+          <br />
+          
+
+
    <div>
     <Routes>
     <Route path="/" element={<Navigate to="Labs"/>}/>
