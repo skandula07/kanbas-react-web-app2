@@ -10,7 +10,7 @@ export default function Float() {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <img className="wd-float-right" width="200px" height="150px"
+      <img className="wd-float-right" width="200px" height="150px" 
      src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg"/>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -39,7 +39,7 @@ export default function Float() {
    <div className="wd-float-left wd-dimension-portrait wd-bg-color-red">
      Red </div>
    <img className="wd-float-right"
-     src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg"/>
+     src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg" alt=""/>
    <div className="wd-float-done"></div>
  </div>
 </div>
