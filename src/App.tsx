@@ -14,9 +14,7 @@ function App() {
           <Link to="/Labs">Labs</Link> &nbsp;|&nbsp;<Link to="/Kanbas">Kanbas</Link>&nbsp;|&nbsp; <a href="https://github.com/skandula07/kanbas-react-web-app2/tree/a1"> GitHub Repo</a>
           <br />
           <br />
-          <hr />
-          <br />
-          
+          <hr />          
 
 
    <div>

@@ -61,8 +61,8 @@ export default function Forms() {
         <input type="radio" name="radio-genre" id="wd-radio-comedy" />
         <label htmlFor="wd-radio-comedy">Comedy</label>
         <br />
-        <input type="radio" name="radio-genre" id="wd-radio-drama" />
-        <label htmlFor="wd-radio-drama">Drama</label>
+        <input type="radio" name="music-genre" id="wd-radio-drama" />
+        <label htmlFor="wd-radio-drama">Comedy</label>
         <br />
         <input type="radio" name="radio-genre" id="wd-radio-scifi" />
         <label htmlFor="wd-radio-scifi">Science Fiction</label>
@@ -83,10 +83,14 @@ export default function Forms() {
         <br />
         <input type="checkbox" name="check-genre" id="wd-chkbox-fantasy" />
         <label htmlFor="wd-chkbox-fantasy">Fantasy</label>
+
+
+
         <h4 id="wd-dropdowns">Dropdowns</h4>
         <h5>Select one</h5>
         <label htmlFor="wd-select-one-genre"> Favorite movie genre: </label>
         <br />
+
         <select id="wd-select-one-genre">
           <option value="COMEDY">Comedy</option>
           <option value="DRAMA">Drama</option>
@@ -95,6 +99,9 @@ export default function Forms() {
           </option>
           <option value="FANTASY">Fantasy</option>
         </select>
+
+
+
         <h5>Select many</h5>
         <label htmlFor="wd-select-many-genre"> Favorite movie genres: </label>
         <br />
@@ -136,6 +143,17 @@ export default function Forms() {
         <br />
         <label htmlFor="wd-text-fields-dob"> Date of birth: </label>
         <input type="date" id="wd-text-fields-dob" value="2000-01-21" />
+
+
+
+        <input type="date" id="wd-text-fields-dob" value="2011-11-22" />
+       
+       
+        {/* <input  id="ABC" title="XYZ" placeholder="RST" /> */}
+        
+        
+        
+        
         <br />
       </form>
     </div>
