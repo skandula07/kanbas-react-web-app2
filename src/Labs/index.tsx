@@ -6,6 +6,7 @@ export default function Labs() {
   return (
 
     <div id="wd-labs">
+       <h1>Sree Kandula ☆ CS4550 Section 01</h1>      
    <TOC />
 
       <h1>Labs</h1>
