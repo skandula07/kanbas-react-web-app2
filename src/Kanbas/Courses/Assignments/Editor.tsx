@@ -1,143 +1,239 @@
+import { BiCalendarEvent } from "react-icons/bi";
+import { FaX } from "react-icons/fa6";
+
 export default function AssignmentEditor() {
   return (
     <div id="wd-assignments-editor">
-      <br />
+      <div className="container">
+        <div className="mb-4">
+          <label htmlFor="wd-name" className="mb-2">
+            Assignment Name
+          </label>{" "}
+          <br />
+          <input
+            id="wd-name"
+            className="form-control w-50 w-sm-100"
+            defaultValue="A1 - ENV + HTML"
+          />
+        </div>
 
-      <label htmlFor="wd-name">Assignment Name</label>
-      <input id="wd-name" value="A1 - ENV + HTML" />
-      <br />
-      <br />
-      <textarea id="wd-description" cols={60} rows={10}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-        pellentesque ipsum vitae ante posuere, a egestas nisi volutpat. Duis
-        mollis odio sed maximus rutrum. Etiam tristique tincidunt nibh, et
-        porttitor est pulvinar vel. Integer aliquet iaculis lacinia. Phasellus
-        at elementum ipsum. Fusce finibus a ex ut gravida. Morbi ac felis
-        commodo lectus vulputate eleifend non et nunc. Donec molestie blandit
-        erat eu tincidunt. Nunc tempor ante vel tortor condimentum, ac sodales
-        ante condimentum. Cras vulputate nisi in odio pellentesque interdum ut
-        quis ligula. Suspendisse potenti. Nunc rutrum eu lacus consequat
-        posuere. Ut ut dolor eu est suscipit pretium non eu orci. Sed a orci
-        ultrices mauris laoreet mattis quis fringilla purus. Cras imperdiet a
-        orci eu gravida. Morbi efficitur velit nec nibh hendrerit, vitae iaculis
-        magna ultrices.
-      </textarea>
-      <br />
-      <br />
-      <table>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-points">Points</label>
-          </td>
-          <td>
-            <input id="wd-points" value={100} />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-points">Assignment Group</label>
-          </td>
-          <td>
-            <select id="wd-group" value={100}>
-              <option selected value="assignments">
-                ASSIGNMENTS
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-display-grade-as">Display Grade As</label>
-          </td>
-          <td>
-            <select id="wd-group" value={100}>
-              <option selected value="percentage">
-                Percentage
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-display-grade-as">Submission Type</label>
-          </td>
-          <td>
-            <select id="wd-submission-type" value={100}>
-              <option selected value="online">
-                Online
-              </option>
-            </select>
-            <br />
-            Online Entry Options
-            <br />
-            <input type="checkbox" name="submission-type" id="wd-text-entry" />
-            <label htmlFor="wd-text-entry">Text Entry</label>
-            <br />
-            <input type="checkbox" name="submission-type" id="wd-website-url" />
-            <label htmlFor="wd-website-url">Website URL</label>
-            <br />
-            <input
-              type="checkbox"
-              name="submission-type"
-              id="wd-media-recordings"
-            />
-            <label htmlFor="wd-media-recordings">Media Recordings</label>
-            <br />
-            <input
-              type="checkbox"
-              name="submission-type"
-              id="wd-student-annotation"
-            />
-            <label htmlFor="wd-student-annotation">Student Annotation</label>
-            <br />
-            <input type="checkbox" name="submission-type" id="wd-file-upload" />
-            <label htmlFor="wd-file-upload">File Upload</label>
-          </td>
-        </tr>
-        <br />
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-assign-to">Assign &nbsp;</label>
-          </td>
-          <td>
-            Assign To:
-            <br />
-            <input type="text" defaultValue="Everyone" />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor=""></label>
-          </td>
-          <td>
-            <br />
-            Due:
-            <br />
-            <input type="date" id="wd-due-date" value="2024-03-13" />
-            <br />
-            <br />
-            Available From:&nbsp;&nbsp;&nbsp;&nbsp;Until:
-            <br />
-            <input type="date" id="wd-available-from" value="2024-05-16" /> &nbsp;
-            <input type="date" id="wd-available-until" value="2024-05-20" />
-          </td>
-        </tr>
-      </table>
+        <textarea
+          id="wd-description"
+          cols={60}
+          rows={10}
+          className="form-control mb-3 w-50 w-sm-100"
+        >
+          The assignment is available online
+        </textarea>
 
-      <hr />
+        <div className="container">
+          <div className="row mb-3">
+            <div className="col-2">
+              <label htmlFor="wd-points" className="float-end">
+                Points
+              </label>
+            </div>
+            <div className="col-9 col-lg-4">
+              <input id="wd-points" className="form-control" value={100} />
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col-2">
+              <label htmlFor="wd-group" className="float-end text-end">
+                Assignment Group
+              </label>
+            </div>
+            <div className="col-9 col-lg-4">
+              <select id="wd-group" value={100} className="form-select">
+                <option selected value="assignments">
+                  ASSIGNMENTS
+                </option>
+              </select>
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col-2">
+              <label
+                htmlFor="wd-display-grade-as"
+                className="float-end text-end"
+              >
+                Display Grade As
+              </label>
+            </div>
+            <div className="col-9 col-lg-4">
+              <select
+                id="wd-display-grade-as"
+                value={100}
+                className="form-select"
+              >
+                <option selected value="percentage">
+                  Percentage
+                </option>
+              </select>
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col-2">
+              <label
+                htmlFor="wd-submission-type"
+                className="float-end text-end"
+              >
+                Submission Type
+              </label>
+            </div>
+            <div className="col-9 col-lg-4">
+              <div className="border p-3">
+                <select
+                  id="wd-submission-type"
+                  value={100}
+                  className="mb-3 form-select"
+                >
+                  <option selected value="online">
+                    Online
+                  </option>
+                </select>
+                <h6 className="mb-2">
+                  <b>Online Entry Options</b>
+                </h6>
 
-      <table width="100%">
-        <tr> 
-          <td align="right">
-            <button id="wd-cancel-assignment" type="button">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="submission-type"
+                    id="wd-text-entry"
+                  />
+                  <label className="form-check-label" htmlFor="wd-text-entry">
+                    Text Entry
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="submission-type"
+                    id="wd-website-url"
+                  />
+                  <label className="form-check-label" htmlFor="wd-website-url">
+                    Website URL
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="submission-type"
+                    id="wd-media-recordings"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="wd-media-recordings"
+                  >
+                    Media Recordings
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="submission-type"
+                    id="wd-student-annotation"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="wd-student-annotation"
+                  >
+                    Student Annotation
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="submission-type"
+                    id="wd-file-upload"
+                  />
+                  <label className="form-check-label" htmlFor="wd-file-upload">
+                    File Upload
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row mb-3">
+            <div className="col-2">
+              <label htmlFor="wd-assign-to" className="float-end text-end">
+                Assign &nbsp;
+              </label>
+            </div>
+            <div className="col-9 col-lg-4">
+              <div className="border p-3">
+                <h6 className="mb-2">
+                  <b>Assign To</b>
+                </h6>
+                <div className="border p-2  mb-3">
+                  <button className="btn btn-secondary btn-sm">
+                    Everyone &nbsp;
+                    <FaX className="float-right" />
+                  </button>
+                </div>
+
+                <h6 className="mb-2">
+                  <b>Due</b>
+                </h6>
+                <div className="input-group mb-4">
+                  <input
+                    type="text"
+                    id="wd-due-date"
+                    value="2024-03-13"
+                    className="form-control"
+                  />
+                  <span className="input-group-text">
+                    <BiCalendarEvent />
+                  </span>
+                </div>
+
+                <div className="d-flex">
+
+                  <div className="p-2 pl-0">
+                  <h6 className="mb-2">
+                  <b>Available From:</b>
+                </h6>
+                <div className="input-group">
+                <input type="text" id="wd-available-from" value="2024-05-16" className="form-control" />
+                  <span className="input-group-text">
+                    <BiCalendarEvent />
+                  </span>
+                </div>
+                  </div>
+
+                  <div className="p-2 pr-0">
+                  <h6 className="mb-2">
+                  <b>Available Until:</b>
+                </h6>
+                <div className="input-group">
+                <input type="until" id="wd-available-until" value="2024-05-20" className="form-control" />
+                  <span className="input-group-text">
+                    <BiCalendarEvent />
+                  </span>
+                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <button id="wd-submit-assignment" type="button" className="btn btn-danger float-end m-1">
+              Save
+            </button>
+          <button id="wd-cancel-assignment" type="button" className="btn btn-secondary float-end m-1">
               Cancel
             </button>
-            <button id="wd-submit-assignment" type="button">
-              Submit
-            </button>
-          </td>
-        </tr>
-      </table>
+            
+        </div>
+        
+      </div>
     </div>
   );
 }
