@@ -1,39 +1,23 @@
 import { AiOutlineDashboard } from "react-icons/ai";
-import { IoCalendarOutline, IoFlaskOutline } from "react-icons/io5";
-import { LiaBookSolid} from "react-icons/lia";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { IoCalendarOutline } from "react-icons/io5";
+import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
-import { BsInbox } from "react-icons/bs";
 export default function KanbasNavigation() {
-  
-
   const { pathname } = useLocation();
   const links = [
     { label: "Dashboard", path: "/Kanbas/Dashboard", icon: AiOutlineDashboard },
     { label: "Courses",   path: "/Kanbas/Dashboard", icon: LiaBookSolid },
     { label: "Calendar",  path: "/Kanbas/Calendar",  icon: IoCalendarOutline },
-    { label: "Inbox",     path: "/Kanbas/Inbox",     icon: BsInbox },
-    { label: "Labs",      path: "/Labs",             icon: IoFlaskOutline },
+    { label: "Inbox",     path: "/Kanbas/Inbox",     icon: FaInbox },
+    { label: "Labs",      path: "/Labs",             icon: LiaCogSolid },
   ];
-  
-  
   return (
-  
-    <div
-      style={{ width: 120 }}
-      className="d-none d-md-block bg-black position-fixed bottom-0 top-0 z-2 list-group rounded-0 border-0"
-      id="wd-kanbas-navigation"
-    >
-      <a
-        className="list-group-item bg-black text-white text-center border-0"
-        href="https://www.northeastern.edu/"
-        id="wd-neu-link"
-      
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img src="/images/NEU.png" alt="NEU" width="100" height="100" />
-      </a>
+    <div id="wd-kanbas-navigation" style={{width: 120}}
+         className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2">
+      <a id="wd-neu-link" target="_blank" rel="noreferrer" href="https://www.northeastern.edu/"
+        className="list-group-item bg-black border-0 text-center">
+        <img src="/images/NEU.png" width="75px" alt="" /></a>
       <Link to="/Kanbas/Account" className={`list-group-item text-center border-0 bg-black
             ${pathname.includes("Account") ? "bg-white text-danger" : "bg-black text-white"}`}>
         <FaRegCircleUser className={`fs-1 ${pathname.includes("Account") ? "text-danger" : "text-white"}`} />
@@ -48,6 +32,5 @@ export default function KanbasNavigation() {
           {link.label}
         </Link>
       ))}
-
     </div>
 );}
