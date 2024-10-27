@@ -15,7 +15,6 @@ export default function AssignmentEditor() {
   return (
     <div id="wd-assignments-editor">
 
-      {/* {JSON.stringify(cid)} */}
 
 <div className="container">
         <div className="mb-4">
