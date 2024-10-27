@@ -1,20 +1,38 @@
 import { BiCalendarEvent } from "react-icons/bi";
+import { Link } from "react-router-dom";
 import { FaX } from "react-icons/fa6";
+import * as db from "../../Database";
+import { useLocation } from "react-router";
 
 export default function AssignmentEditor() {
+
+
+  const url = useLocation().pathname;
+  const aid = url.substring(url.lastIndexOf("/") + 1);
+  const assignment = db.assignments.find((a) => a._id === aid);
+
+
   return (
     <div id="wd-assignments-editor">
-      <div className="container">
+
+      {/* {JSON.stringify(cid)} */}
+
+<div className="container">
         <div className="mb-4">
           <label htmlFor="wd-name" className="mb-2">
             Assignment Name
           </label>{" "}
           <br />
+
+
+          
+          
           <input
             id="wd-name"
             className="form-control w-50 w-sm-100"
-            defaultValue="A1 - ENV + HTML"
+            defaultValue={`${assignment?.title}`}
           />
+
         </div>
 
         <textarea
@@ -23,7 +41,7 @@ export default function AssignmentEditor() {
           rows={10}
           className="form-control mb-3 w-50 w-sm-100"
         >
-          The assignment is available online
+          { assignment?.description }
         </textarea>
 
         <div className="container">
@@ -34,7 +52,7 @@ export default function AssignmentEditor() {
               </label>
             </div>
             <div className="col-9 col-lg-4">
-              <input id="wd-points" className="form-control" value={100} />
+              <input id="wd-points" className="form-control" value={`${assignment?.points}`} />
             </div>
           </div>
           <div className="row mb-3">
@@ -225,15 +243,18 @@ export default function AssignmentEditor() {
           </div>
           <hr />
           <button id="wd-submit-assignment" type="button" className="btn btn-danger float-end m-1">
-              Save
+          <Link to={`/Kanbas/Courses/${assignment?.course}/Assignments`}  className="list-group-item border border-0"> Save </Link>
             </button>
           <button id="wd-cancel-assignment" type="button" className="btn btn-secondary float-end m-1">
-              Cancel
+          <Link to={`/Kanbas/Courses/${assignment?.course}/Assignments`} className="list-group-item border border-0" > Cancel </Link>
             </button>
             
         </div>
         
       </div>
+
+
+      
     </div>
   );
 }

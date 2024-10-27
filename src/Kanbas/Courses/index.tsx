@@ -8,15 +8,18 @@ import Zoom from "./Zoom";
 import Piazza from "./Piazza";
 import Quizzes from "./Quizzes";
 import Grades from "./Grades";
-import Editor from "./Assignments/Editor";
 import { FaAlignJustify } from "react-icons/fa";
 import { courses } from "./../Database";
+// import AssignmentEditor from "./Assignments";
+import { assignments } from "./../Database";
+import Editor from "./Assignments/Editor";
 
 export default function Courses() {
   const { pathname } = useLocation();
 
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
+  const as = assignments.filter((a) => a.course === course?._id);
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
@@ -35,7 +38,11 @@ export default function Courses() {
               <Route path="Home" element={<Home />} />
               <Route path="Modules" element={<Modules />} />
               <Route path="Assignments" element={<Assignments />} />
-              <Route path="Assignments/aid:" element={<Editor />} />
+
+              {as.map((a) => (
+                 <Route path={`Assignments/${a._id}`} element={<Editor />} />
+              ))}
+
               <Route path="People" element={<People />} />
               <Route path="Piazza" element={<Piazza />} />
               <Route path="Quizzes" element={<Quizzes />} />

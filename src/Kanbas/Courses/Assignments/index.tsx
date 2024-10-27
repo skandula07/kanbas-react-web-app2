@@ -72,9 +72,9 @@ export default function Assignments() {
              <FaClipboard className="text-success me-1 fs-5 float-start me-3" />
              <div className="float-start">
               <h5><b>{ a.title }</b></h5>
-              <span className="text-danger">Multiple Modules</span> |<b> Not available until</b> May 6 at 12:00 am |
+              <span className="text-danger">Multiple Modules</span> |<b> Not available until</b> {a.availabe_from} |
               <br />
-              <b>Due</b> May 13 at 11:59 am | 100pts
+              <b>Due</b> {a.due} | {a.points}
             </div>
             <span className="float-end"> <LessonControlButtons /> </span>
             </a>
