@@ -12,6 +12,10 @@ import ReduxExamples from "./ReduxExamples";
 import StringStateVariables from "./StringStateVariables";
 import store from "../store";
 import { Provider } from "react-redux";
+import HelloRedux from "./ReduxExamples/HelloRedux";
+import CounterRedux from "./ReduxExamples/CounterRedux";
+import AddRedux from "./ReduxExamples/AddRedux";
+import TodoList from "./ReduxExamples/todos/TodoList";
 
 
 export default function Lab4() {
@@ -37,8 +41,12 @@ export default function Lab4() {
         <ObjectStateVariable />
         <ArrayStateVariable />
         <ParentStateComponent />
-        <ReduxExamples />
 
+        <HelloRedux />
+        <CounterRedux />
+        <AddRedux />
+        <TodoList />
+        
 
         </div>
         </Provider>
