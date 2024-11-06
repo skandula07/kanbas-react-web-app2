@@ -27,7 +27,6 @@ export default function Lab4() {
 
         <Provider store={store}>
         <div>
-
         <h1>Lab 4</h1>
         <ClickEvent />
         <PassingDataOnEvent />

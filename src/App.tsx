@@ -1,16 +1,18 @@
 import React from "react";
-// import './App.css';
 import { HashRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import Labs from "./Labs";
 import Kanbas from "./Kanbas";
+import store from "./Kanbas/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <div className="App">
-      <div>
+   
          
 
         <HashRouter>
+        <Provider store={store}>
+
           <Link to="/Labs">Labs</Link> &nbsp;|&nbsp;<Link to="/Kanbas">Kanbas</Link>
           <br />
           <br />
@@ -28,9 +30,9 @@ function App() {
      
     </Routes>
    </div>
+   </Provider>
+
   </HashRouter>
-      </div>
-    </div>
   );
 }
 

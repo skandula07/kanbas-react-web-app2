@@ -1,5 +1,6 @@
 import Add from "./Add";
 import AddingAndRemovingToFromArrays from "./AddingAndRemovingToFromArrays";
+import AddPathParameters from "./AddPathParameters";
 import ArrayIndexAndLength from "./ArrayIndexAndLength";
 import ArrowFunctions from "./ArrowFunctions";
 import BooleanVariables from "./BooleanVariables";
@@ -20,6 +21,7 @@ import ImpliedReturns from "./ImpliedReturns";
 import JsonStringify from "./JsonStringify";
 import LegacyFunctions from "./LegacyFunctions";
 import MapFunction from "./MapFunction";
+import PathParameters from "./PathParameters";
 import SimpleArrays from "./SimpleArrays";
 import Spreading from "./Spreading";
 import Square from "./Square";
@@ -30,24 +32,13 @@ import TodoItem from "./todos/TodoItem";
 import TodoList from "./todos/TodoList";
 import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
-import { useSelector } from "react-redux";
-
 
 export default function Lab3() {
   console.log('Hello World!');
-  const { todos } = useSelector((state: any) => state.todosReducer);
 
   return (
     <div id="wd-lab3">
       <h3>Lab 3</h3>
-      <ul className="list-group">
-        {todos.map((todo: any) => (
-          <li className="list-group-item" key={todo.id}>
-            {todo.title}
-          </li>
-        ))}
-      </ul>
-      <hr />
       <VariablesAndConstants />
       <VariableTypes />
       <BooleanVariables />
@@ -80,6 +71,12 @@ export default function Lab3() {
       <DestructingImports />
 
 
+      <PathParameters />
+      <AddPathParameters />
+
+
+
+
       <Classes />
       <Styles />
 
@@ -95,6 +92,7 @@ export default function Lab3() {
         vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
      </Highlight>
      <hr />    
+
 
 
   

@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import AddPathParameters from "./AddPathParameters";
 export default function PathParameters() {
+  // const { a, b } = useParams();
  return (
   <div id="wd-path-parameters">
    <h2>Path Parameters</h2>
@@ -9,4 +10,10 @@ export default function PathParameters() {
    <Routes>
      <Route path="add/:a/:b" element={<AddPathParameters />} />
    </Routes>
+
+
+   {/* {a} + {b} = {parseInt(a as string) + parseInt(b as string)} */}
+
+
+
   </div>);}

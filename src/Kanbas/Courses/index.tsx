@@ -9,12 +9,11 @@ import Piazza from "./Piazza";
 import Quizzes from "./Quizzes";
 import Grades from "./Grades";
 import { FaAlignJustify } from "react-icons/fa";
-import { courses } from "./../Database";
-// import AssignmentEditor from "./Assignments";
 import { assignments } from "./../Database";
 import Editor from "./Assignments/Editor";
 
-export default function Courses() {
+export default function Courses({ courses }: { courses: any[]; }) {
+
   const { pathname } = useLocation();
 
   const { cid } = useParams();
