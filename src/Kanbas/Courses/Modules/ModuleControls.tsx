@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa6";
 import { MdDoNotDisturbAlt } from "react-icons/md";
+import { useSelector } from "react-redux";
 import GreenCheckmark from "./GreenCheckmark";
 import ModuleEditor from "./ModuleEditor";
 
@@ -7,9 +8,12 @@ import ModuleEditor from "./ModuleEditor";
 
 export default function ModulesControls({ moduleName, setModuleName, addModule }:
   { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }) {
+
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-     <button className="btn btn-danger me-1 float-end" id="wd-add-module-btn"
+     <button className={`btn btn-danger me-1 float-end ${currentUser.role === "FACULTY"? "visible" : "invisible float-start" }`} id="wd-add-module-btn"
         data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog" >
         <FaPlus className="position-relative me-2"
                 style={{ bottom: "1px" }} />
