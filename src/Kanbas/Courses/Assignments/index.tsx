@@ -33,8 +33,6 @@ export default function Assignments() {
     <div id="wd-assignments">
 
       <div className="d-inline ">
-
-		{JSON.stringify(courseAssignments)}
     
 					<Link to={`/Kanbas/Courses/${cid}/Assignments/New`}>
  						<button
