@@ -10,7 +10,7 @@ import Quizzes from "./Quizzes";
 import Grades from "./Grades";
 import { FaAlignJustify } from "react-icons/fa";
 import { assignments } from "./../Database";
-import Editor from "./Assignments/Editor";
+import Editor from "./Assignments/Editor/Editor";
 
 export default function Courses({ courses }: { courses: any[]; }) {
 
@@ -37,6 +37,9 @@ export default function Courses({ courses }: { courses: any[]; }) {
               <Route path="Home" element={<Home />} />
               <Route path="Modules" element={<Modules />} />
               <Route path="Assignments" element={<Assignments />} />
+              
+              <Route path="/Assignments/New" element={<Editor />} />
+
 
               {as.map((a) => (
                  <Route path={`Assignments/${a._id}`} element={<Editor />} />

@@ -1,19 +1,66 @@
-import { BiCalendarEvent } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addAssignment, updateAssignment } from "./../reducer";
 import { FaX } from "react-icons/fa6";
-import * as db from "../../Database";
-import { useLocation } from "react-router";
-
-export default function AssignmentEditor() {
+import { BiCalendarEvent } from "react-icons/bi";
 
 
-  const url = useLocation().pathname;
-  const aid = url.substring(url.lastIndexOf("/") + 1);
-  const assignment = db.assignments.find((a) => a._id === aid);
+function AssignmentEditor() {
+	
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const cid = useParams();
+ 	const url = useLocation().pathname;
+  	const aid = url.substring(url.lastIndexOf("/") + 1);
 
+
+  const assignments = useSelector((state : any) => state.assignmentsReducer.assignments);
+  const assignment = getAssignment();
+
+
+
+  function getAssignment() {
+	if (aid === "New") {
+		const newAssignmentTemplate = {
+			title: "New Assignment",
+			course: cid.cid,
+			description: "Add Description",
+			due: "May 20, 2024",
+			available_from: "May 7, 2024",
+			available_until: "May 27, 2024",
+			points: "100",
+			display_grade_as : "Percentage",
+			submission_type : "Online",
+			assign_to : "Everyone",
+		  };
+		return newAssignmentTemplate;
+	}
+	return assignments.find((assignment : any) => assignment._id === aid);
+  }
+
+
+  const handleSave = () => {
+    if (aid === "New") {
+      const newAssignment = {
+        ...assignment,
+        _id: new Date().getTime().toString(),
+      };
+      dispatch(addAssignment(newAssignment));
+
+    } else {
+      dispatch(updateAssignment(assignment));
+    }
+    navigate(`/Kanbas/Courses/${cid.cid}/Assignments`);
+  };
 
   return (
+
+
+
     <div id="wd-assignments-editor">
+
+		{JSON.stringify(assignment)}
 
 
 <div className="container">
@@ -30,6 +77,7 @@ export default function AssignmentEditor() {
             id="wd-name"
             className="form-control w-50 w-sm-100"
             defaultValue={`${assignment?.title}`}
+			onChange={(e) => dispatch(updateAssignment({ ...assignment, title: e.target.value }))}
           />
 
         </div>
@@ -39,6 +87,7 @@ export default function AssignmentEditor() {
           cols={60}
           rows={10}
           className="form-control mb-3 w-50 w-sm-100"
+		  onChange={(e) => dispatch(updateAssignment({ ...assignment, description: e.target.value }))}
         >
           { assignment?.description }
         </textarea>
@@ -51,7 +100,8 @@ export default function AssignmentEditor() {
               </label>
             </div>
             <div className="col-9 col-lg-4">
-              <input id="wd-points" className="form-control" value={`${assignment?.points}`} />
+              <input id="wd-points" className="form-control" value={`${assignment?.points}`} 
+			  onChange={(e) => dispatch(updateAssignment({ ...assignment, points: e.target.value })) }/>
             </div>
           </div>
           <div className="row mb-3">
@@ -205,6 +255,7 @@ export default function AssignmentEditor() {
                     id="wd-due-date"
                     value="2024-03-13"
                     className="form-control"
+					onChange={(e) => dispatch(updateAssignment({ ...assignment, due: e.target.value })) }
                   />
                   <span className="input-group-text">
                     <BiCalendarEvent />
@@ -218,7 +269,8 @@ export default function AssignmentEditor() {
                   <b>Available From:</b>
                 </h6>
                 <div className="input-group">
-                <input type="text" id="wd-available-from" value="2024-05-16" className="form-control" />
+                <input type="text" id="wd-available-from" value="2024-05-16" className="form-control"
+				onChange={(e) => dispatch(updateAssignment({ ...assignment, available_from: e.target.value }))} />
                   <span className="input-group-text">
                     <BiCalendarEvent />
                   </span>
@@ -230,7 +282,8 @@ export default function AssignmentEditor() {
                   <b>Available Until:</b>
                 </h6>
                 <div className="input-group">
-                <input type="until" id="wd-available-until" value="2024-05-20" className="form-control" />
+                <input type="until" id="wd-available-until" value="2024-05-20" className="form-control" 
+				onChange={(e) => dispatch( updateAssignment({ ...assignment, avialable_until: e.target.value }) ) }/>
                   <span className="input-group-text">
                     <BiCalendarEvent />
                   </span>
@@ -241,7 +294,7 @@ export default function AssignmentEditor() {
             </div>
           </div>
           <hr />
-          <button id="wd-submit-assignment" type="button" className="btn btn-danger float-end m-1">
+		  <button onClick={handleSave} className="btn btn-danger float-end m-1">
           <Link to={`/Kanbas/Courses/${assignment?.course}/Assignments`}  className="list-group-item border border-0"> Save </Link>
             </button>
           <button id="wd-cancel-assignment" type="button" className="btn btn-secondary float-end m-1">
@@ -257,3 +310,5 @@ export default function AssignmentEditor() {
     </div>
   );
 }
+
+export default AssignmentEditor;

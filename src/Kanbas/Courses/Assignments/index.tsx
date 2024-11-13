@@ -1,27 +1,59 @@
+
 import { BiPlus, BiSearch, BiSolidDownArrow } from "react-icons/bi";
 import { BsGripVertical } from "react-icons/bs";
-import { FaClipboard } from "react-icons/fa6";
+import { FaClipboard, FaDeleteLeft } from "react-icons/fa6";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { useParams } from "react-router";
 
+
+
 import LessonControlButtons from "../Modules/LessonControlButtons";
-import * as db from "../../Database";
+
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment, selectAssignment } from "./reducer";
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments.filter((a) => a.course === cid);
+
+  
+
+
+  const assignments = useSelector((state : any) => state.assignmentsReducer.assignments);
+  const courseAssignments = assignments.filter((assignment : any) => assignment.course === cid);
+  const dispatch = useDispatch();
+
+  	const [selectedAssignment, setSelectedAssignment] = React.useState(
+  		assignments[0]
+  	);
+
 
   return (
     <div id="wd-assignments">
 
       <div className="d-inline ">
-        <button className="btn btn-danger me-1 float-end">
-          <BiPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Assignment{" "}
-        </button>
+
+		{JSON.stringify(courseAssignments)}
+    
+					<Link to={`/Kanbas/Courses/${cid}/Assignments/New`}>
+ 						<button
+ 							type="button"
+ 							className="btn btn-danger mx-1 float-end text-white bg-danger"
+ 							// onClick={() => {
+ 							// 	dispatch(
+ 							// 		selectAssignment(newAssignmentTemplate)
+ 							// 	);
+ 							// }}
+ 						>
+ 							+ Assignment
+						
+
+ 						</button>
+					</Link>
+
+
+
         <button className="btn btn-secondary me-1 float-end">
           <BiPlus
             className="position-relative me-2"
@@ -63,11 +95,15 @@ export default function Assignments() {
         </li>
 
 
-        {assignments
-        .map((a) => (
+        {courseAssignments
+        .map((a : any) => (
           <li className="wd-assignment-list-item d-inline list-group-item p-3">
           <a className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
               href={`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`}>
+
+          <Link to={`/Kanbas/Courses/${a.course}/Assignments/${a._id}`}
+           className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
+          onClick={(e : any) => { dispatch( selectAssignment(a));}} />
              <BsGripVertical className="me-2 fs-3 float-start" />
              <FaClipboard className="text-success me-1 fs-5 float-start me-3" />
              <div className="float-start">
@@ -78,13 +114,86 @@ export default function Assignments() {
             </div>
             <span className="float-end"> <LessonControlButtons /> </span>
             </a>
+            <FaDeleteLeft
+											className="float-end mx-1 my-1"
+											color="red"
+                     
+											data-bs-toggle="modal"
+											data-bs-target="#deleteModal"
+											onClick={(e) => {
+												setSelectedAssignment({
+													...a,
+												});
+											}}
+										/>
+                     {/* DELETE MODALLLLLL */}
+                     <div
+											className="modal fade"
+											id="deleteModal"
+											aria-labelledby="deleteModalLabel"
+											aria-hidden="true"
+										>
+											<div className="modal-dialog">
+												<div className="modal-content">
+													<div className="modal-header">
+														<h1
+															className="modal-title fs-5"
+															id="deleteModalLabel"
+														>
+															Delete{" "}
+															{
+																selectedAssignment.title
+															}
+															?
+														</h1>
+														<button
+															type="button"
+															className="btn-close"
+															data-bs-dismiss="modal"
+															aria-label="Close"
+														></button>
+													</div>
+													<div className="modal-body">
+														Are you sure you want to
+														delete this assignment?
+													</div>
+													<div className="modal-footer">
+														<button
+															type="button"
+															className="btn btn-secondary"
+															data-bs-dismiss="modal"
+														>
+															No
+														</button>
+														<button
+															type="button"
+															className="btn btn-primary"
+															data-bs-dismiss="modal"
+															onClick={() =>
+																dispatch(
+																	deleteAssignment(
+																		selectedAssignment._id
+																	)
+																)
+															}
+														>
+															Yes
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
           </li>
         ))}
-
         <ul className="list-group rounded-0 border-top-0 mt-0">
+        </ul>
+        </ul>
 
-        </ul>
-        </ul>
+        
+
+
+
+        
     </div>
   );
 }

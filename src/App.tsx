@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 
 function App() {
   return (
-   
-         
+
+  
 
         <HashRouter>
         <Provider store={store}>
@@ -18,16 +18,12 @@ function App() {
           <br />
         
 
-
    <div>
     <Routes>
     <Route path="/" element={<Navigate to="Kanbas"/>}/>
-
      <Route path="/Labs/*" element={<Labs />} />
      {/* <Route path="/Kanbas" element={<Kanbas />} /> */}
-     <Route path="/Kanbas/*" element={<Kanbas />} />
-
-     
+     <Route path="/Kanbas/*" element={<Kanbas />} />  
     </Routes>
    </div>
    </Provider>
