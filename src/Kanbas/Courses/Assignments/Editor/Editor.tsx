@@ -60,9 +60,6 @@ function AssignmentEditor() {
 
     <div id="wd-assignments-editor">
 
-		{JSON.stringify(assignment)}
-
-
 <div className="container">
         <div className="mb-4">
           <label htmlFor="wd-name" className="mb-2">

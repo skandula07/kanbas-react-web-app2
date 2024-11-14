@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 
 export default function Assignments() {
   const { cid } = useParams();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
 
   
 
@@ -29,6 +31,15 @@ export default function Assignments() {
   	);
 
 
+	function editAccess(a : any) {
+		if (currentUser.role === "FACULTY") {
+			return (`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`);
+		} else {
+			return (`#/Kanbas/Courses/${a.course}/Assignments/`);
+		}
+	}
+
+
   return (
     <div id="wd-assignments">
 
@@ -37,7 +48,7 @@ export default function Assignments() {
 					<Link to={`/Kanbas/Courses/${cid}/Assignments/New`}>
  						<button
  							type="button"
- 							className="btn btn-danger mx-1 float-end text-white bg-danger"
+ 							className={`btn btn-danger mx-1 float-end text-white bg-danger  ${currentUser.role === "FACULTY"? "visible" : "invisible float-start" }`}
  							// onClick={() => {
  							// 	dispatch(
  							// 		selectAssignment(newAssignmentTemplate)
@@ -75,6 +86,7 @@ export default function Assignments() {
       </div>
 
 
+
 {/* ASSDIGNSDGMENTS */}
 
       <ul id="wd-assignment-list" className="list-group rounded-0 ">
@@ -97,11 +109,9 @@ export default function Assignments() {
         .map((a : any) => (
           <li className="wd-assignment-list-item d-inline list-group-item p-3">
           <a className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
-              href={`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`}>
+              href={editAccess(a)}>
 
-          <Link to={`/Kanbas/Courses/${a.course}/Assignments/${a._id}`}
-           className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
-          onClick={(e : any) => { dispatch( selectAssignment(a));}} />
+       
              <BsGripVertical className="me-2 fs-3 float-start" />
              <FaClipboard className="text-success me-1 fs-5 float-start me-3" />
              <div className="float-start">
@@ -113,7 +123,7 @@ export default function Assignments() {
             <span className="float-end"> <LessonControlButtons /> </span>
             </a>
             <FaDeleteLeft
-											className="float-end mx-1 my-1"
+											className={`float-end mx-1 my-1 ${currentUser.role === "FACULTY"? "visible" : "invisible float-start" }`}
 											color="red"
                      
 											data-bs-toggle="modal"
