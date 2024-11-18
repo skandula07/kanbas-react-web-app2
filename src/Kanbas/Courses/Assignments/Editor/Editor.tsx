@@ -66,26 +66,19 @@ function AssignmentEditor() {
             Assignment Name
           </label>{" "}
           <br />
-
-
-          
-          
           <input
             id="wd-name"
             className="form-control w-50 w-sm-100"
             defaultValue={`${assignment?.title}`}
 			onChange={(e) => dispatch(updateAssignment({ ...assignment, title: e.target.value }))}
           />
-
         </div>
-
         <textarea
           id="wd-description"
           cols={60}
           rows={10}
           className="form-control mb-3 w-50 w-sm-100"
-		  onChange={(e) => dispatch(updateAssignment({ ...assignment, description: e.target.value }))}
-        >
+		  onChange={(e) => dispatch(updateAssignment({ ...assignment, description: e.target.value }))}>
           { assignment?.description }
         </textarea>
 
