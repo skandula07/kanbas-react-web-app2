@@ -55,7 +55,7 @@ export default function Dashboard(
       </div>
 
       <hr/>
-      {isFaculty && <div>
+      {currentUser==="FACULTY" && <div>
         <h5>New Course
           <button className="btn btn-primary float-end"
                   id="wd-add-new-course-click"
