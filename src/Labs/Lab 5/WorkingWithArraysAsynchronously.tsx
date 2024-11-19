@@ -9,10 +9,10 @@ export default function WorkingWithArraysAsynchronously() {
     setTodos(todos);
   };
 
-  const removeTodo = async (todo: any) => {
-    const updatedTodos = await client.removeTodo(todo);
-    setTodos(updatedTodos);
-  };
+  // const removeTodo = async (todo: any) => {
+  //   const updatedTodos = await client.removeTodo(todo);
+  //   setTodos(updatedTodos);
+  // }npm;
   // const createTodo = async () => {
   //   const todos = await client.createTodo();
   //   setTodos(todos);
