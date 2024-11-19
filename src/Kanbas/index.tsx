@@ -30,10 +30,6 @@ export default function Kanbas() {
     );
     setCourse({ ...course, name: "New Course", description: "New Description"});
   };
-
-
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const isFaculty = currentUser?.role === "FACULTY";
   return (
     <div id="wd-kanbas">
       <KanbasNavigation />
@@ -50,7 +46,7 @@ export default function Kanbas() {
                 addNewCourse={addNewCourse}
                 deleteCourse={deleteCourse}
                 updateCourse={updateCourse}
-                isFaculty={isFaculty}
+
               />
             </ProtectedRoute>
           } />

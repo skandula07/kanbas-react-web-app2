@@ -5,13 +5,12 @@ import {enroll, unenroll} from "./enrollmentsReducer";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
-    deleteCourse, updateCourse, isFaculty}: {
+    deleteCourse, updateCourse}: {
   courses: any[]; course: any;
   setCourse: (course: any) => void;
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
-  updateCourse: () => void;
-  isFaculty: boolean;}) {
+  updateCourse: () => void;}) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isStudent = currentUser?.role === "STUDENT";
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
