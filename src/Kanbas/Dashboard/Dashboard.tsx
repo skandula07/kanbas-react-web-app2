@@ -115,7 +115,7 @@ export default function Dashboard(
                                     }}>Enroll</button>}
                         </div>
                       }
-                      {isFaculty && <div>
+                      {currentUser==="FACULTY" && <div>
                         <button id="wd-edit-course-click"
                                 onClick={(event) => {
                                   event.preventDefault();
