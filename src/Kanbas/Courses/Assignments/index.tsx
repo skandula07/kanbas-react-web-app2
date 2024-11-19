@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment, selectAssignment } from "./reducer";
+import { deleteAssignment } from "./reducer";
 import React from "react";
 import { Link } from "react-router-dom";
 

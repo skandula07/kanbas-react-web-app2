@@ -1,4 +1,4 @@
-export default [
+const courses = [
     {
       "_id": "RS101",
       "name": "Rocket Propulsion",
@@ -219,3 +219,5 @@ export default [
       "description": "This engineering course offers an in-depth study of hydraulic projects in ancient civilizations, with a special focus on Yu the Great's flood control systems. Covering the design, construction, and impact of ancient dams, canals, and irrigation systems, the course provides insights into early engineering marvels. Comparative studies of hydraulic engineering in other ancient civilizations, such as Mesopotamia and the Indus Valley, are also included to provide a broader historical and technological context."
     }
   ]
+
+  export default courses;

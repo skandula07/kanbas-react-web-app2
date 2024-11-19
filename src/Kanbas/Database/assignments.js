@@ -1,4 +1,4 @@
-export default [
+const assignments = [
   {
     "_id": "A101",
     "title": "Propulsion Assignment",
@@ -119,3 +119,4 @@ export default [
     "description": "This project is about Systems Engineering Exam"
   }
 ]
+export default assignments;

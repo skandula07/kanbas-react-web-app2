@@ -1,9 +1,9 @@
-export default [
+const users = [
     {
       "_id": "123",
       "username": "iron_man",
       "password": "stark123",
-      "firstName": "Tony",
+      "fiarrayrstName": "Tony",
       "lastName": "Stark",
       "email": "tony@stark.com",
       "dob": "1970-05-29T00:00:00.000Z",
@@ -126,3 +126,5 @@ export default [
       "totalActivity": "21:32:43"
     }
   ]
+
+  export default users;
