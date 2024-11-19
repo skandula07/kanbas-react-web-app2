@@ -87,7 +87,7 @@ export default function Dashboard(
                     if (!isCourseEnrolled(course)) {
                       event.preventDefault(); // Prevents navigation if not enrolled
                     }
-                  }}
+                  }} 
                 >
                   <img src={`/images/${course._id}.jpg`} width="100%" alt=" " height={160}/>
                   <div className="card-body">
