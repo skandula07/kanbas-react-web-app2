@@ -15,10 +15,6 @@ export default function HttpClient() {
     fetchWelcomeOnLoad();
   }, []);
 
-  
-
-
-
 
   return (
     <div>
