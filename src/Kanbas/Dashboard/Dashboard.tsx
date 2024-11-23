@@ -10,8 +10,7 @@ export default function Dashboard(
   setCourse: (course: any) => void;
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
-  updateCourse: () => void;
-  isFaculty: boolean;}) {
+  updateCourse: () => void;}) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isStudent = currentUser?.role === "STUDENT";
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
