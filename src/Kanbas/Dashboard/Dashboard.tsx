@@ -13,6 +13,7 @@ export default function Dashboard(
   updateCourse: () => void;}) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isStudent = currentUser?.role === "STUDENT";
+  const isFaculty = currentUser?.role === "FACULTY";
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const [showAllCourses, setShowAllCourses] = useState(false);
   const dispatch = useDispatch();
@@ -42,9 +43,14 @@ export default function Dashboard(
 
 
 
+    // function handleAdd(c: { course: any; }) {
+    //   enrollCourse(c);
+    //   addNewCourse;
+    // };
+
 
     function DashboardEditor() {
-      if (currentUser.role === "FACULTY") {
+      if (isFaculty) {
       return (
         <div>
 
@@ -71,15 +77,20 @@ export default function Dashboard(
              <input
                value={course.name}
                className="form-control mb-2"
-               onChange={(e) => setCourse({ ...course, name: e.target.value })}
+               onChange={(e) => setCourse({ ...course, name: e.target.value })              
+              }
              />
              <textarea
                value={course.description}
                className="form-control"
-               onChange={(e) => setCourse({ ...course, description: e.target.value })}
+               onChange={(e) => 
+                setCourse({ ...course, description: e.target.value })}
              />
                    <hr />
-              </div>
+
+
+                   {JSON.stringify(enrollments.filter((e: { user: any; }) => e.user === currentUser._id))}
+                                 </div>
            
        ); } else {
         return (
@@ -109,7 +120,10 @@ export default function Dashboard(
       <hr/>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {filteredCourses.map(course => (
+          {courses.filter((course) => enrollments.some((enrollment: { user: any; course: any; }) =>
+                  enrollment.user === currentUser._id &&
+                  enrollment.course === course._id))
+                  .map(course => (
             <div className="wd-dashboard-course col" style={{width: "300px"}}>
               <div className="card rounded-3 overflow-hidden">
                 <Link
@@ -147,7 +161,7 @@ export default function Dashboard(
                                     }}>Enroll</button>}
                         </div>
                       }
-                      {currentUser === "FACULTY" && <div>
+                      {currentUser.role === "FACULTY" && <div>
                         <button id="wd-edit-course-click"
                                 onClick={(event) => {
                                   event.preventDefault();

@@ -3,7 +3,9 @@ import { enrollments } from "../Database";
 
 const initialState = {
   enrollments: enrollments,
-};
+}; 
+
+
 
 const enrollmentsSlice = createSlice({
   name: "enrollments",

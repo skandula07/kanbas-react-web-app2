@@ -7,19 +7,35 @@ import "./styles.css";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./ProtectedRoute";
-// import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { enroll } from "./Dashboard/enrollmentsReducer";
 
 export default function Kanbas() {
+
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+  const dispatch = useDispatch();
+  
   const [courses, setCourses] = useState<any[]>(db.courses);
   const [course, setCourse] = useState<any>({
     _id: "0", name: "New Course", number: "New Number",
     startDate: "2023-09-10", endDate: "2023-12-15",
     image: "/images/reactjs.jpg", description: "New Description"
   });
+
+
   const addNewCourse = () => {
     const newCourse = { ...course,
       _id: new Date().getTime().toString() };
-    setCourses([...courses, { ...course, ...newCourse }]);
+      const newEnrollment = {
+        user: currentUser._id,
+        course: newCourse._id,
+      };
+      dispatch(enroll(newEnrollment));
+    setCourses([...courses, newCourse ]);
+
+
   };
   const deleteCourse = (courseId: string) => {
     setCourses(courses.filter((course) => course._id !== courseId));
@@ -30,6 +46,9 @@ export default function Kanbas() {
     );
     setCourse({ ...course, name: "New Course", description: "New Description"});
   };
+
+
+
   return (
     <div id="wd-kanbas">
       <KanbasNavigation />
