@@ -49,6 +49,16 @@ export default function TOC() {
           Gitbub Repo
         </a>
       </li>
+      <li className="nav-item">
+        <a id="wd-k" href="https://kanbas-node-server-app-5b53.onrender.com/" className="nav-link">
+          Remote Server
+        </a>
+      </li>
+      <li className="nav-item">
+        <a id="wd-k" href="https://github.com/skandula07/kanbas-node-server-app/tree/main" className="nav-link">
+          Server Repo
+        </a>
+      </li>
     </ul>
   );
 }
