@@ -19,10 +19,12 @@ export default function Profile() {
     navigate("/Kanbas/Account/Signin");
   };
 
+
   const updateProfile = async () => {
     const updatedProfile = await client.updateUser(profile);
     dispatch(setCurrentUser(updatedProfile));
   };
+
 
 
   useEffect(() => { fetchProfile(); });
@@ -49,6 +51,7 @@ export default function Profile() {
             <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
           </select>
           <button onClick={updateProfile} className="btn btn-primary w-100 mb-2"> Update </button>
+
           <button onClick={signout} className="btn btn-danger w-100 mb-2" id="wd-signout-btn">
             Sign out
           </button>

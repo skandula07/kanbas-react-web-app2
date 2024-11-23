@@ -48,6 +48,7 @@ export default function Dashboard(
       if (currentUser.role === "FACULTY") {
       return (
         <div>
+
          <h5>
              New Course
              <button
@@ -90,6 +91,7 @@ export default function Dashboard(
 
   return (
     <div id="wd-dashboard">
+
       <div className="d-flex align-items-center justify-content-between">
         <h1 id="wd-dashboard-title" className="mb-0">Dashboard</h1>
         {isStudent && <div>
@@ -108,7 +110,7 @@ export default function Dashboard(
       <hr/>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {filteredCourses.map(course => (
+          {courses.map(course => (
             <div className="wd-dashboard-course col" style={{width: "300px"}}>
               <div className="card rounded-3 overflow-hidden">
                 <Link
