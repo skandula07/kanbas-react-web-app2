@@ -7,7 +7,7 @@ import "./styles.css";
 import * as db from "./Database";
 import { useState } from "react";
 import ProtectedRoute from "./ProtectedRoute";
-import {useSelector} from "react-redux";
+// import {useSelector} from "react-redux";
 
 export default function Kanbas() {
   const [courses, setCourses] = useState<any[]>(db.courses);
