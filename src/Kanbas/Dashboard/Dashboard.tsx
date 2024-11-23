@@ -5,12 +5,13 @@ import {enroll, unenroll} from "./enrollmentsReducer";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
-    deleteCourse, updateCourse}: {
+    deleteCourse, updateCourse, isFaculty}: {
   courses: any[]; course: any;
   setCourse: (course: any) => void;
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
-  updateCourse: () => void;}) {
+  updateCourse: () => void;
+  isFaculty: boolean;}) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isStudent = currentUser?.role === "STUDENT";
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
@@ -40,6 +41,55 @@ export default function Dashboard(
     ? courses
     : courses.filter((course) => isCourseEnrolled(course));
 
+
+
+
+    function DashboardEditor() {
+      if (currentUser.role === "FACULTY") {
+      return (
+        <div>
+
+          
+         <h5>
+             New Course
+             <button
+               className="btn btn-primary float-end"
+               id="wd-add-new-course-click"
+               onClick={addNewCourse}
+             >
+               {" "}
+               Add{" "}
+             </button>
+             <button
+               className="btn btn-warning float-end me-2"
+               onClick={updateCourse}
+               id="wd-update-course-click"
+             >
+               Update
+             </button>
+           </h5>
+             <br />
+             <input
+               value={course.name}
+               className="form-control mb-2"
+               onChange={(e) => setCourse({ ...course, name: e.target.value })}
+             />
+             <textarea
+               value={course.description}
+               className="form-control"
+               onChange={(e) => setCourse({ ...course, description: e.target.value })}
+             />
+                   <hr />
+              </div>
+           
+       ); } else {
+        return (
+          <span><hr /></span>
+          
+        );
+       }
+     }
+
   return (
     <div id="wd-dashboard">
       <div className="d-flex align-items-center justify-content-between">
@@ -54,23 +104,7 @@ export default function Dashboard(
       </div>
 
       <hr/>
-      {currentUser==="FACULTY" && <div>
-        <h5>New Course
-          <button className="btn btn-primary float-end"
-                  id="wd-add-new-course-click"
-                  onClick={() => addNewCourse()}> Add </button>
-          <button className="btn btn-warning float-end me-2"
-                  onClick={() => updateCourse()} id="wd-update-course-click">
-            Update
-          </button>
-        </h5>
-        <br/>
-        <input value={course.name} className="form-control mb-2"
-               onChange={(e) => setCourse({...course, name: e.target.value})}/>
-        <textarea value={course.description} className="form-control"
-                  onChange={(e) => setCourse({...course, description: e.target.value})}/>
-        <hr/>
-      </div>}
+      {DashboardEditor()}
 
       <h2 id="wd-dashboard-published">Published Courses ({filteredCourses.length})</h2>
       <hr/>
@@ -86,7 +120,7 @@ export default function Dashboard(
                     if (!isCourseEnrolled(course)) {
                       event.preventDefault(); // Prevents navigation if not enrolled
                     }
-                  }} 
+                  }}
                 >
                   <img src={`/images/${course._id}.jpg`} width="100%" alt=" " height={160}/>
                   <div className="card-body">
@@ -114,7 +148,7 @@ export default function Dashboard(
                                     }}>Enroll</button>}
                         </div>
                       }
-                      {currentUser==="FACULTY" && <div>
+                      {isFaculty && <div>
                         <button id="wd-edit-course-click"
                                 onClick={(event) => {
                                   event.preventDefault();
