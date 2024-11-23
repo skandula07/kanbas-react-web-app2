@@ -5,8 +5,8 @@ import {enroll, unenroll} from "./enrollmentsReducer";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
-    deleteCourse, updateCourse, isFaculty}: {
-  courses: any[]; course: any;
+    deleteCourse, updateCourse}: {
+  courses: any[]; course: any; 
   setCourse: (course: any) => void;
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
@@ -147,7 +147,7 @@ export default function Dashboard(
                                     }}>Enroll</button>}
                         </div>
                       }
-                      {isFaculty && <div>
+                      {currentUser === "FACULTY" && <div>
                         <button id="wd-edit-course-click"
                                 onClick={(event) => {
                                   event.preventDefault();
