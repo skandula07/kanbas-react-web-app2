@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
-import {enroll, unenroll} from "./enrollmentsReducer";
+import {enroll, unenroll, setEnrollments} from "./enrollmentsReducer";
+import * as enrollmentsClient from "./client";
+import * as userClient from "../Account/client";
+import * as courseClient from "../Courses/client";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
@@ -14,32 +17,68 @@ export default function Dashboard(
   isFaculty: boolean;}) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isStudent = currentUser?.role === "STUDENT";
+  const [allCourses, setAllCourses] = useState<any[]>([]);
+  const [myCourses, setMyCourses] = useState<any[]>([]);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const [showAllCourses, setShowAllCourses] = useState(false);
   const dispatch = useDispatch();
 
-  const enrollCourse = ({ course }: { course: any }) => {
-    const newEnrollment = {
-      user: currentUser._id,
-      course: course._id,
-    };
-    dispatch(enroll(newEnrollment));
+
+  const fetchAllCourses = async () => {
+    let allCourses = [];
+    try {
+      allCourses = await courseClient.fetchAllCourses();
+    } catch (error) {
+      console.error(error);
+    }
+    setAllCourses(allCourses);
   };
 
-  const dropCourse = ({ course }: { course: any }) => {
-    const enrollment = enrollments.find((e: any) =>
-      e.user === currentUser._id && e.course === course._id);
-    dispatch(unenroll(enrollment._id));
+
+  const fetchMyCourses = async () => {
+    const myCourses = await userClient.findMyCourses();
+    setMyCourses(myCourses);
+  }
+
+  const fetchEnrollments = async () => {
+    const userEnrollments = await userClient.findAllMyEnrollments(currentUser._id);
+    dispatch(setEnrollments(userEnrollments));
+  }
+
+  useEffect(() => {
+    fetchMyCourses()
+    fetchAllCourses();
+    fetchEnrollments();
+  })
+
+
+   // Filter show courses
+   const studentCourses = showAllCourses ? allCourses : myCourses;
+   const filteredCourses = isStudent ? studentCourses : courses;
+
+
+
+  const enrollCourse = async ({ course }: { course: any }) => {
+    await enrollmentsClient.addEnrollment(currentUser._id, course._id)
+    fetchMyCourses();
+    dispatch(enroll({userId: currentUser._id, courseId : course._id}));
   };
 
-  const isCourseEnrolled = (course: any) =>
+
+  const dropCourse = async ({ course }: { course: any }) => {
+    await enrollmentsClient.deleteEnrollment(currentUser._id, course._id)
+    fetchMyCourses();
+    dispatch(unenroll({userId: currentUser._id, courseId : course._id}));
+  };
+
+
+  const isCourseEnrolled = (course: any) => 
     enrollments.some((enrollment: any) =>
       enrollment.user === currentUser._id && enrollment.course === course._id);
+  
 
-  // Filter show courses
-  const filteredCourses = showAllCourses
-    ? courses
-    : courses.filter((course) => isCourseEnrolled(course));
+
+
 
 
 
@@ -71,8 +110,7 @@ export default function Dashboard(
              <input
                value={course.name}
                className="form-control mb-2"
-               onChange={(e) => setCourse({ ...course, name: e.target.value })}
-             />
+               onChange={(e) => setCourse({...course, name: e.target.value})}/>
              <textarea
                value={course.description}
                className="form-control"
@@ -92,6 +130,8 @@ export default function Dashboard(
   return (
     <div id="wd-dashboard">
 
+      {/* {JSON.stringify(allCourses)} */}
+
       <div className="d-flex align-items-center justify-content-between">
         <h1 id="wd-dashboard-title" className="mb-0">Dashboard</h1>
         {isStudent && <div>
@@ -110,7 +150,7 @@ export default function Dashboard(
       <hr/>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {courses.map(course => (
+          {filteredCourses.map(course => (
             <div className="wd-dashboard-course col" style={{width: "300px"}}>
               <div className="card rounded-3 overflow-hidden">
                 <Link

@@ -12,10 +12,11 @@ export default function ModuleControlButtons( { moduleId, deleteModule, editModu
     editModule: (moduleId: string) => void } ) {
 
       const { currentUser } = useSelector((state: any) => state.accountReducer);
+      const isFaculty = currentUser?.role === "FACULTY";
 
   return (
     <div className={`float-end ${currentUser.role === "FACULTY"? "visible" : "invisible float-start" }`} >
-         <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />
+      {isFaculty && <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3"/>}
        <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(moduleId)}/>
       <GreenCheckmark />
       <BsPlusLg />

@@ -32,10 +32,16 @@ export default function Modules() {
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
-  const saveModule = async (module: any) => {
+
+  
+  const saveModule = async (module: string) => {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
+
+
+
+  
 
   return (
     <div>
@@ -54,12 +60,12 @@ export default function Modules() {
                            dispatch(
                              updateModule({ ...module, name: e.target.value })
                            )}
-                         onKeyDown={(e) => {
-                           if (e.key === "Enter") {
-                             saveModule({ ...module, editing: false });
-                           }
-
-                         }}
+                           onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              saveModule({ ...module, editing: false });
+                            }
+ 
+                          }}
                          defaultValue={module.name}/>
                 )}
                 <ModuleControlButtons

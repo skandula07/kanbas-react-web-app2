@@ -3,45 +3,74 @@ import { BiPlus, BiSearch, BiSolidDownArrow } from "react-icons/bi";
 import { BsGripVertical } from "react-icons/bs";
 import { FaClipboard, FaDeleteLeft } from "react-icons/fa6";
 import { IoEllipsisVertical } from "react-icons/io5";
-import { useParams } from "react-router";
-
+import { useNavigate, useParams } from "react-router";
+import * as assignmentsClient from "./client"
 
 
 import LessonControlButtons from "../Modules/LessonControlButtons";
 
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment } from "./reducer";
-import React from "react";
+import { deleteAssignment, setAssignment, setAssignments } from "./reducer";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Assignments() {
-  const { cid } = useParams();
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-
-
-  
-
-
-  const assignments = useSelector((state : any) => state.assignmentsReducer.assignments);
+	const { cid } = useParams();
+	const { currentUser } = useSelector((state: any) => state.accountReducer);
+	const navigate = useNavigate();
+  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments);
   const courseAssignments = assignments.filter((assignment : any) => assignment.course === cid);
   const dispatch = useDispatch();
 
-  	const [selectedAssignment, setSelectedAssignment] = React.useState(
-  		assignments[0]
-  	);
+  // Define a state variable to track the selected assignment ID
+  const [assignmentToDelete, setAssignmentToDelete] = useState("");
+
+  const fetchAssignments = async () => {
+    const assignments = await assignmentsClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  }
+
+  useEffect(() => {
+    fetchAssignments();
+  })
+
+  const startAddAssignment = () => {
+    if (!cid) return;
+    navigate(`/Kanbas/Courses/${cid}/Assignments/Editor`);
+    const newAssignment = {
+      title: "New Assignment",
+      description: "New Description",
+      points: 100,
+      due_date: "",
+      available_from: "",
+      available_until: "",
+    };
+    dispatch(setAssignment(newAssignment));
+  };
+
+  const handleDeleteAssignment = async () => {
+    if (assignmentToDelete) {
+      await assignmentsClient.deleteAssignment(assignmentToDelete);
+      dispatch(deleteAssignment(assignmentToDelete));
+      setAssignmentToDelete(""); // reset after deletion
+    }
+  };
 
 
-	function editAccess(a : any) {
-		if (currentUser.role === "FACULTY") {
-			return (`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`);
-		} else {
-			return (`#/Kanbas/Courses/${a.course}/Assignments/`);
-		}
-	}
 
+//   function editAccess(a : any) {
+// 	if (currentUser.role === "FACULTY") {
+// 		return (`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`);
+// 	} else {
+// 		return (`#/Kanbas/Courses/${a.course}/Assignments/`);
+// 	}
+// }
 
   return (
     <div id="wd-assignments">
+
+		{/* {JSON.stringify(assignments)} */}
+		{/* {JSON.stringify("")} */}
 
       <div className="d-inline ">
     
@@ -49,11 +78,7 @@ export default function Assignments() {
  						<button
  							type="button"
  							className={`btn btn-danger mx-1 float-end text-white bg-danger  ${currentUser.role === "FACULTY"? "visible" : "invisible float-start" }`}
- 							// onClick={() => {
- 							// 	dispatch(
- 							// 		selectAssignment(newAssignmentTemplate)
- 							// 	);
- 							// }}
+ 							onClick={() => startAddAssignment()}
  						>
  							+ Assignment
 						
@@ -104,12 +129,11 @@ export default function Assignments() {
         </h4> </div>
         </li>
 
-
         {courseAssignments
         .map((a : any) => (
           <li className="wd-assignment-list-item d-inline list-group-item p-3">
           <a className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
-              href={editAccess(a)}>
+              href={`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`}>
 
        
              <BsGripVertical className="me-2 fs-3 float-start" />
@@ -128,11 +152,7 @@ export default function Assignments() {
                      
 											data-bs-toggle="modal"
 											data-bs-target="#deleteModal"
-											onClick={(e) => {
-												setSelectedAssignment({
-													...a,
-												});
-											}}
+											onClick={() => setAssignmentToDelete(a._id)}
 										/>
                      {/* DELETE MODALLLLLL */}
                      <div
@@ -149,9 +169,7 @@ export default function Assignments() {
 															id="deleteModalLabel"
 														>
 															Delete{" "}
-															{
-																selectedAssignment.title
-															}
+															{a.title}
 															?
 														</h1>
 														<button
@@ -163,7 +181,7 @@ export default function Assignments() {
 													</div>
 													<div className="modal-body">
 														Are you sure you want to
-														delete this assignment?
+														delete {assignmentToDelete}?
 													</div>
 													<div className="modal-footer">
 														<button
@@ -177,13 +195,7 @@ export default function Assignments() {
 															type="button"
 															className="btn btn-primary"
 															data-bs-dismiss="modal"
-															onClick={() =>
-																dispatch(
-																	deleteAssignment(
-																		selectedAssignment._id
-																	)
-																)
-															}
+															onClick={() => handleDeleteAssignment()}
 														>
 															Yes
 														</button>
@@ -197,11 +209,7 @@ export default function Assignments() {
         </ul>
         </ul>
 
-        
-
-
-
-        
+		
     </div>
   );
 }
