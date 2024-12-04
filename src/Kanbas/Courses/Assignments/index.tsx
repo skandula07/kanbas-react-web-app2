@@ -69,7 +69,7 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
 
-		{/* {JSON.stringify(assignments)} */}
+		{JSON.stringify(assignments)}
 		{/* {JSON.stringify("")} */}
 
       <div className="d-inline ">
