@@ -25,8 +25,7 @@ export default function Profile() {
     dispatch(setCurrentUser(updatedProfile));
   };
 
-
-
+// eslint-disable-next-line
   useEffect(() => { fetchProfile(); }, []);
   return (
     <div className="wd-profile-screen">

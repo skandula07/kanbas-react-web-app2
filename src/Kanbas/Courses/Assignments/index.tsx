@@ -32,6 +32,7 @@ export default function Assignments() {
 
   useEffect(() => {
     fetchAssignments();
+    // eslint-disable-next-line
   }, [])
 
   const startAddAssignment = () => {

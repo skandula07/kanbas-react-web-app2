@@ -54,6 +54,7 @@ export default function Dashboard(
     fetchMyCourses()
     fetchAllCourses();
     fetchEnrollments();
+    // eslint-disable-next-line
   }, []);
 
 

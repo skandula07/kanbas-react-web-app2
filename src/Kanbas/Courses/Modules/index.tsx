@@ -19,8 +19,10 @@ export default function Modules() {
     const modules = await coursesClient.findModulesForCourse(cid as string);
     dispatch(setModules(modules));
   };
+
   useEffect(() => {
     fetchModules();
+    // eslint-disable-next-line
   }, []);
   const createModuleForCourse = async () => {
     if (!cid) return;
