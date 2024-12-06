@@ -32,7 +32,7 @@ export default function Assignments() {
 
   useEffect(() => {
     fetchAssignments();
-  })
+  }, [])
 
   const startAddAssignment = () => {
     if (!cid) return;

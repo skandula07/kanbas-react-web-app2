@@ -21,7 +21,7 @@ export default function Modules() {
   };
   useEffect(() => {
     fetchModules();
-  });
+  }, []);
   const createModuleForCourse = async () => {
     if (!cid) return;
     const newModule = { name: moduleName, course: cid };

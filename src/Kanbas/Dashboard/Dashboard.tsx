@@ -41,15 +41,20 @@ export default function Dashboard(
   }
 
   const fetchEnrollments = async () => {
-    const userEnrollments = await userClient.findAllMyEnrollments(currentUser._id);
-    dispatch(setEnrollments(userEnrollments));
-  }
-
+    try {
+      const userEnrollments = await userClient.findAllMyEnrollments(currentUser._id);
+      dispatch(setEnrollments(userEnrollments));
+    } catch (error) {
+      console.error("Error fetching enrollments:", error); // Log error
+      console.log("Current User ID:", currentUser?._id); // Log current user ID
+    }
+  };
+  
   useEffect(() => {
     fetchMyCourses()
     fetchAllCourses();
     fetchEnrollments();
-  })
+  }, []);
 
 
    // Filter show courses
