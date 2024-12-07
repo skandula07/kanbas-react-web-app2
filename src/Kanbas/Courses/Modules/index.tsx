@@ -36,17 +36,16 @@ export default function Modules() {
   };
 
   
-  const saveModule = async (module: string) => {
+  const saveModule = async (module: any) => {
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
 
 
 
-  
-
   return (
     <div>
+      {/* {JSON.stringify(modules)} */}
       <ModuleControls setModuleName={setModuleName}
                        moduleName={moduleName}
                        addModule={createModuleForCourse}/><br/><br/><br/><br/>
