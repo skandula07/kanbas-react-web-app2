@@ -95,7 +95,7 @@ export default function PeopleDetails() {
             className="wd-name"
             onClick={() => setEditing(true)}
           >
-            {user.firstName} {user.lastName}
+            {user.firstName} {user.lastName} 
           </div>
         )}
         {editing && (
