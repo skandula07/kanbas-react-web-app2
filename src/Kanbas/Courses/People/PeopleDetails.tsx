@@ -4,7 +4,6 @@ import { FaCheck, FaUserCircle } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useParams, useNavigate } from "react-router";
 import * as client from "../../Account/client";
-import { Link } from "react-router-dom";
 
 export default function PeopleDetails() {
   const { uid } = useParams();
@@ -50,6 +49,7 @@ export default function PeopleDetails() {
 
   useEffect(() => {
     if (uid) fetchUser();
+    // eslint-disable-next-line
   }, [uid]);
 
   // Early return while the user data is loading
