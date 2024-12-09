@@ -21,77 +21,10 @@ export default function Dashboard(
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isStudent = currentUser?.role === "STUDENT";
-  const [allCourses, setAllCourses] = useState<any[]>([]);
-  const [myCourses, setMyCourses] = useState<any[]>([]);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
-  const [showAllCourses, setShowAllCourses] = useState(false);
-  const dispatch = useDispatch();
 
+  // const enrolledCourses = courseClient
 
-  const fetchAllCourses = async () => {
-    let allCourses = [];
-    try {
-      allCourses = await courseClient.fetchAllCourses();
-    } catch (error) {
-      console.error(error);
-    }
-    setAllCourses(allCourses);
-  };
-
-
-  const fetchMyCourses = async () => {
-    const myCourses = await userClient.findMyCourses();
-    setMyCourses(myCourses);
-  }
-
-  const fetchEnrollments = async () => {
-    try {
-      const userEnrollments = await userClient.findAllMyEnrollments(currentUser.user);
-      dispatch(setEnrollments(userEnrollments));
-    } catch (error) {
-      console.error("Error fetching enrollments:", error); // Log error
-      console.log("Current User ID:", currentUser?._id); // Log current user ID
-    }
-  };
-  
-  useEffect(() => {
-    fetchMyCourses()
-    fetchAllCourses();
-    fetchEnrollments();
-    // eslint-disable-next-line
-  }, []);
-
-
-   // Filter show courses
-   const studentCourses = showAllCourses ? allCourses : myCourses;
-   const filteredCourses = isStudent ? studentCourses : courses;
-
-
-
-  const enrollCourse = async ({ course }: { course: any }) => {
-    await enrollmentsClient.addEnrollment(currentUser._id, course._id)
-    fetchMyCourses();
-    dispatch(enroll({userId: currentUser._id, courseId : course._id}));
-  };
-
-
-  const dropCourse = async ({ course }: { course: any }) => {
-    await enrollmentsClient.deleteEnrollment(currentUser._id, course._id)
-    fetchMyCourses();
-    dispatch(unenroll({userId: currentUser._id, courseId : course._id}));
-  };
-
-
-  const isCourseEnrolled = (course: any) => 
-    enrollments.some((enrollment: any) =>
-      enrollment.user === currentUser._id && enrollment.course === course._id);
-  
-
-
-
-
-
-
+  // const allCourses = courseClient.fetchAllCourses
 
     function DashboardEditor() {
       if (currentUser.role === "FACULTY") {
@@ -140,13 +73,12 @@ export default function Dashboard(
   return (
     <div id="wd-dashboard">
 
-      {/* {JSON.stringify(allCourses)} */}
 
       <div className="d-flex align-items-center justify-content-between">
         <h1 id="wd-dashboard-title" className="mb-0">Dashboard</h1>
         {isStudent && <div>
-          <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
-          {enrolling ? "My Courses" : "All Courses"}
+          <button onClick={() => setEnrolling(!enrolling)} className={`btn ${enrolling ? "btn-success" : "btn-primary" } float-end`} >
+          {enrolling ? "Done!" : "All Courses"}
         </button>
 
         </div>}
@@ -158,10 +90,18 @@ export default function Dashboard(
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr/>
       <div id="wd-dashboard-courses" className="row">
+        {/* {JSON.stringify(courses)} */}
+        {/* {courses} */}
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {courses.map(course => (
-            <div className="wd-dashboard-course col" style={{width: "300px"}}>
+              
+            <div className="wd-dashboard-course col" style={{width: "300px"}} key={course._id}>
+                {/* {JSON.stringify(course)} */}
+                {/* {enrolledCourses} */}
+                <br /> 
+                <br /> 
               <div className="card rounded-3 overflow-hidden">
+                {/* {JSON.stringify(course)} */}
                 <Link
                   className={`wd-dashboard-course-link text-decoration-none text-dark }`}
                   to={`/Kanbas/Courses/${course.number}/Home`}
@@ -175,18 +115,19 @@ export default function Dashboard(
                       {course.description}
                     </p>
                     <div className="d-flex justify-content-between">
-                      {!showAllCourses && <button className="btn btn-primary" style={{maxWidth: 50}}>Go</button>}
-                      {isStudent && showAllCourses &&
+                      {!enrolling && <button className="btn btn-primary" style={{maxWidth: 50}}>Go</button>}
+                      {isStudent &&
                         <div id="wd-enrollment-control">
                         {enrolling && (
-                            <button onClick={(event) => {
-                                      event.preventDefault();
-                                      updateEnrollment(course._id, !course.enrolled);
-                                    }}
-                                    className={`btn ${ course.enrolled ? "btn-danger" : "btn-success" } float-end`} >
-                              {course.enrolled ? "Unenroll" : "Enroll"}
-                            </button>
-                          )}
+              <button onClick={(event) => {
+                        event.preventDefault();
+                        updateEnrollment(course.number, !course.enrolled);
+                      }}
+                      className={`btn ${ course.enrolled ? "btn-danger" : "btn-success" } float-end`} >
+                {course.enrolled ? "Unenroll" : "Enroll"}
+              </button>
+            )}
+
 
                         </div>
                       }

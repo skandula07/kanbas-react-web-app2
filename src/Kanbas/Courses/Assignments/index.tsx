@@ -18,8 +18,8 @@ export default function Assignments() {
 	const { cid } = useParams();
 	const { currentUser } = useSelector((state: any) => state.accountReducer);
 	const navigate = useNavigate();
-  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments);
-  const courseAssignments = assignments.filter((assignment : any) => assignment.course === cid);
+  const [assignments, setAssignments] = useState<any[]>([]);
+
   const dispatch = useDispatch();
 
   // Define a state variable to track the selected assignment ID
@@ -27,13 +27,13 @@ export default function Assignments() {
 
   const fetchAssignments = async () => {
     const assignments = await assignmentsClient.findAssignmentsForCourse(cid as string);
-    dispatch(setAssignments(assignments));
+    setAssignments(assignments);
   }
 
   useEffect(() => {
     fetchAssignments();
     // eslint-disable-next-line
-  }, [])
+  }, [cid])
 
   const startAddAssignment = () => {
     if (!cid) return;
@@ -58,19 +58,10 @@ export default function Assignments() {
   };
 
 
-
-//   function editAccess(a : any) {
-// 	if (currentUser.role === "FACULTY") {
-// 		return (`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`);
-// 	} else {
-// 		return (`#/Kanbas/Courses/${a.course}/Assignments/`);
-// 	}
-// }
-
   return (
     <div id="wd-assignments">
 
-		{JSON.stringify(assignments)}
+		{/* {JSON.stringify(assignments)} */}
 		{/* {JSON.stringify("")} */}
 
       <div className="d-inline ">
@@ -130,11 +121,12 @@ export default function Assignments() {
         </h4> </div>
         </li>
 
-        {courseAssignments
+        {assignments
         .map((a : any) => (
           <li className="wd-assignment-list-item d-inline list-group-item p-3">
+            {JSON.stringify(a)}
           <a className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
-              href={`#/Kanbas/Courses/${a.course}/Assignments/${a._id}`}>
+              href={`#/Kanbas/Courses/${a.course}/Assignments/${a.number}`}>
 
        
              <BsGripVertical className="me-2 fs-3 float-start" />
@@ -153,7 +145,7 @@ export default function Assignments() {
                      
 											data-bs-toggle="modal"
 											data-bs-target="#deleteModal"
-											onClick={() => setAssignmentToDelete(a._id)}
+											onClick={() => setAssignmentToDelete(a.number)}
 										/>
                      {/* DELETE MODALLLLLL */}
                      <div

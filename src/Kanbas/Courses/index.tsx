@@ -8,9 +8,11 @@ import Zoom from "./Zoom";
 import Piazza from "./Piazza";
 import Quizzes from "./Quizzes";
 import Grades from "./Grades";
+import * as assignmentsClient from "./Assignments/client"
 import { FaAlignJustify } from "react-icons/fa";
-import { assignments } from "./../Database";
+// import { assignments } from "./../Database";
 import Editor from "./Assignments/Editor/Editor";
+import { useEffect, useState } from "react";
 
 export default function Courses({ courses }: { courses: any[]; }) {
 
@@ -18,7 +20,20 @@ export default function Courses({ courses }: { courses: any[]; }) {
 
   const { cid } = useParams();
   const course = courses.find((course) => course.number === cid);
-  const as = assignments.filter((a) => a.course === course?.number);
+  // const as = assignments.filter((a) => a.course === course?.number);
+
+  const [assignments, setAssignments] = useState<any[]>([]);
+  
+  const fetchAssignments = async () => {
+    const assignments = await assignmentsClient.findAssignmentsForCourse(cid as string);
+    setAssignments(assignments);
+  }
+
+  useEffect(() => {
+    fetchAssignments();
+    // eslint-disable-next-line
+  }, [cid])
+
   
   return (
     <div id="wd-courses">
@@ -42,8 +57,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
               <Route path="/Assignments/New" element={<Editor />} />
 
 
-              {as.map((a) => (
-                 <Route path={`Assignments/${a._id}`} element={<Editor />} />
+              {assignments.map((a) => (
+                 <Route path={`Assignments/${a.number}`} element={<Editor />} />
               ))}
 
               <Route path="People" element={<People />} />

@@ -21,7 +21,9 @@ export default function Kanbas() {
   const [enrolling, setEnrolling] = useState<boolean>(false);
  const findCoursesForUser = async () => {
    try {
-     const courses = await userClient.findCoursesForUser(currentUser._id);
+
+    console.log("findcoursesForUser - KanbasIndex.tsx", currentUser.user)
+     const courses = await userClient.findCoursesForUser(currentUser.user);
      setCourses(courses);
    } catch (error) {
      console.error(error);
@@ -29,13 +31,13 @@ export default function Kanbas() {
  };
  const updateEnrollment = async (courseId: string, enrolled: boolean) => {
   if (enrolled) {
-    await userClient.enrollIntoCourse(currentUser._id, courseId);
+    await userClient.enrollIntoCourse(currentUser.user, courseId);
   } else {
-    await userClient.unenrollFromCourse(currentUser._id, courseId);
+    await userClient.unenrollFromCourse(currentUser.user, courseId);
   }
   setCourses(
     courses.map((course) => {
-      if (course._id === courseId) {
+      if (course.number === courseId) {
         return { ...course, enrolled: enrolled };
       } else {
         return course;
