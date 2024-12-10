@@ -13,6 +13,7 @@ export default function People() {
   };
   useEffect(() => {
     fetchUsers();
+     // eslint-disable-next-line
   }, [cid]);
 
     return (

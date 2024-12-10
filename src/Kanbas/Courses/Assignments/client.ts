@@ -56,11 +56,15 @@ export const deleteAssignment = async (assignmentId: string) => {
 // Update an existing assignment
 export const updateAssignment = async (assignment: any) => {
   try {
+    console.log("Updating... ",assignment.number)
     const response = await axiosWithCredentials.put(
-      `${REMOTE_SERVER}/api/courses/assignments/${assignment._id}`,
+      `${REMOTE_SERVER}/api/courses/assignments/${assignment.number}`,
       assignment
     );
+    console.log("Response for update assignment...", response)
+
     return response.data;
+
   } catch (error) {
     console.error("Error updating assignment:", error);
     throw error;

@@ -26,7 +26,7 @@ export default function PeopleDetails() {
       setFirstName(fetchedUser.firstName || ""); // Set default empty string if firstName is missing
       setLastName(fetchedUser.lastName || ""); // Set default empty string if lastName is missing
       setRole(fetchedUser.role || ""); // Set role if available
-      setEmail(fetchedUser.email || ""); // Set email if available
+      setEmail(fetchedUser.email || ""); // Set email if available 
     } catch (error) {
       console.error("Error fetching user:", error);
     } finally {
@@ -69,9 +69,7 @@ export default function PeopleDetails() {
         className="btn position-fixed end-0 top-0 wd-close-details"
       >
 
-        {/* <Link to={`/Kanbas/Account/Users/`} className="text-decoration-none"> */}
         <IoCloseSharp className="fs-1" />
-        {/* </Link> */}
       </button>
       <div className="text-center mt-2">
         <FaUserCircle className="text-secondary me-2 fs-1" />

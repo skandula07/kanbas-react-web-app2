@@ -7,6 +7,7 @@ export default function Users() {
   const [users, setUsers] = useState<any[]>([]);
   const { uid } = useParams();
   const [role, setRole] = useState("");
+   // eslint-disable-next-line
   const [name, setName] = useState("");
 
   const createUser = async () => {

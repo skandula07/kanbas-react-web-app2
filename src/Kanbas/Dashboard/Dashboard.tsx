@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import { Link } from "react-router-dom";
-import {enroll, unenroll, setEnrollments} from "./enrollmentsReducer";
-import * as enrollmentsClient from "./client";
-import * as userClient from "../Account/client";
-import * as courseClient from "../Courses/client";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,

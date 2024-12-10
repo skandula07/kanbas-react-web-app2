@@ -10,6 +10,7 @@ import * as assignmentsClient from "./client"
 import LessonControlButtons from "../Modules/LessonControlButtons";
 
 import { useDispatch, useSelector } from "react-redux";
+ // eslint-disable-next-line
 import { deleteAssignment, setAssignment, setAssignments } from "./reducer";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -61,8 +62,6 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
 
-		{/* {JSON.stringify(assignments)} */}
-		{/* {JSON.stringify("")} */}
 
       <div className="d-inline ">
     
@@ -124,7 +123,6 @@ export default function Assignments() {
         {assignments
         .map((a : any) => (
           <li className="wd-assignment-list-item d-inline list-group-item p-3">
-            {JSON.stringify(a)}
           <a className="wd-assignment-link  link-underline link-underline-opacity-0 text-black"
               href={`#/Kanbas/Courses/${a.course}/Assignments/${a.number}`}>
 

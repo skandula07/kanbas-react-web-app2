@@ -1,4 +1,5 @@
 import { FaUserCircle } from "react-icons/fa";
+ // eslint-disable-next-line
 import { Link, useParams } from "react-router-dom";
 import PeopleDetails from "./PeopleDetails";
 
