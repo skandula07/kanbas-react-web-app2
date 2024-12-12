@@ -79,16 +79,6 @@ console.log("Assignment ID:", aid);  // Make sure it's correct
   };
 
 
-
-  // const saveUser = async () => {
-  //   const updatedUser = { ...user, firstName, lastName, role, email };
-  //   await client.updateUser(updatedUser);
-  //   setUser(updatedUser);
-  //   setEditing(false);
-  //   navigate(-1);
-  // };
-
-
   const handleSave = async () => {
     const updatedAssignment = { 
       ...assignment, // Keep the original assignment object for any missing fields
@@ -341,8 +331,6 @@ console.log("Assignment ID:", aid);  // Make sure it's correct
                 </div>
               </div>
             </div>
-
-            {/* Save and Cancel buttons */}
             <hr />
             <button
               onClick={handleSave}
