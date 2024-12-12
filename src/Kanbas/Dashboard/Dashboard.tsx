@@ -37,9 +37,7 @@ export default function Dashboard(
       enrollment.user === currentUser._id && enrollment.course === course._id);
 
   // Filter show courses
-  const filteredCourses = showAllCourses
-    ? courses
-    : courses.filter((course) => isCourseEnrolled(course));
+  const filteredCourses = showAllCourses? courses : courses.filter((course) => isCourseEnrolled(course));
 
 
 
@@ -47,6 +45,11 @@ export default function Dashboard(
     //   enrollCourse(c);
     //   addNewCourse;
     // };
+
+
+    // courses.filter((course) => enrollments.some((enrollment: { user: any; course: any; }) =>
+    //               enrollment.user === currentUser._id &&
+    //               enrollment.course === course._id))
 
 
     function DashboardEditor() {
@@ -116,13 +119,11 @@ export default function Dashboard(
       <hr/>
       {DashboardEditor()}
 
-      <h2 id="wd-dashboard-published">Published Courses ({filteredCourses.length})</h2>
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr/>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {courses.filter((course) => enrollments.some((enrollment: { user: any; course: any; }) =>
-                  enrollment.user === currentUser._id &&
-                  enrollment.course === course._id))
+          {filteredCourses
                   .map(course => (
             <div className="wd-dashboard-course col" style={{width: "300px"}}>
               <div className="card rounded-3 overflow-hidden">
